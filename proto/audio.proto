@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "internal/audio";
+
+package audio;
+
+service AudioService {
+  rpc AudioStream(stream AudioEvent) returns (stream AudioResponseEvent) {}
+}
+
+message AudioEvent {
+  string token = 1;
+  bytes audio_data = 2;
+  string device_id = 3;
+  int64 timestamp = 5;
+}
+
+message AudioResponseEvent {
+  string type = 1;
+  string device_id = 2;
+	string priority = 3;
+  repeated int32 labels = 4;
+}
